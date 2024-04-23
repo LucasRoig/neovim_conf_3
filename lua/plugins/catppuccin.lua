@@ -4,7 +4,14 @@ return {
     name = "catppuccin",
     priority = 1000,
     opts = {
-        flavour = "mocha"
+        flavour = "mocha",
+        integrations = {
+            cmp = true,
+            treesitter = true,
+            mason = true,
+            treesitter_context = true,
+            which_key = true,
+        }
     },
     config = function(_, opts)
         require("catppuccin").setup(opts)
