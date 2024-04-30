@@ -21,12 +21,20 @@ return {{
         local capabilities = require("cmp_nvim_lsp").default_capabilities()
         local lspconfig = require('lspconfig')
 
-        -- Call setup with capabilities on each server
-        for _, server in ipairs(lspservers) do
-            lspconfig[server].setup({
-                capabilities = capabilities,
-            })
-        end
+        lspconfig.lua_ls.setup({capabilities = capabilities})
+        lspconfig.tsserver.setup({
+            capabilities = capabilities,
+            on_attach = function(client, bufnr)
+                client.server_capabilities.documentFormattingProvider = false
+            end
+        })
+        lspconfig.eslint.setup({
+            capabilities = capabilities,
+            on_attach = function(client, bufnr)
+                client.server_capabilities.documentFormattingProvider = false
+            end
+        })
+        lspconfig.jsonls.setup({capabilities = capabilities})
 
         vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
         vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
