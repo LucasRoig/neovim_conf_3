@@ -7,7 +7,7 @@ return {{
     "williamboman/mason-lspconfig.nvim",
     config = function()
         require("mason-lspconfig").setup({
-            ensure_installed = {"lua_ls", "tsserver"}
+            ensure_installed = {"lua_ls", "tsserver", "eslint", "jsonls"}
         })
     end
 }, {
@@ -20,6 +20,12 @@ return {{
             capabilities = capabilities,
         })
         lspconfig.lua_ls.setup({
+            capabilities = capabilities,
+        })
+        lspconfig.eslint.setup({
+            capabilities = capabilities,
+        })
+        lspconfig.jsonls.setup({
             capabilities = capabilities,
         })
         vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
