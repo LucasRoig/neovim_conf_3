@@ -1,3 +1,7 @@
+local lspservers = {
+    "lua_ls", "tsserver", "eslint", "jsonls"
+}
+
 return {{
     "williamboman/mason.nvim",
     config = function()
@@ -7,7 +11,7 @@ return {{
     "williamboman/mason-lspconfig.nvim",
     config = function()
         require("mason-lspconfig").setup({
-            ensure_installed = {"lua_ls", "tsserver", "eslint", "jsonls"}
+            ensure_installed = lspservers
         })
     end
 }, {
@@ -16,18 +20,14 @@ return {{
     config = function()
         local capabilities = require("cmp_nvim_lsp").default_capabilities()
         local lspconfig = require('lspconfig')
-        lspconfig.tsserver.setup({
-            capabilities = capabilities,
-        })
-        lspconfig.lua_ls.setup({
-            capabilities = capabilities,
-        })
-        lspconfig.eslint.setup({
-            capabilities = capabilities,
-        })
-        lspconfig.jsonls.setup({
-            capabilities = capabilities,
-        })
+
+        -- Call setup with capabilities on each server
+        for _, server in ipairs(lspservers) do
+            lspconfig[server].setup({
+                capabilities = capabilities,
+            })
+        end
+
         vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
         vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
         vim.keymap.set({'n', 'v'}, '<leader>ca', vim.lsp.buf.code_action, opts)
