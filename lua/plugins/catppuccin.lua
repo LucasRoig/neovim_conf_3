@@ -11,6 +11,7 @@ return {
             mason = true,
             treesitter_context = true,
             which_key = true,
+            neotree = true,
         }
     },
     config = function(_, opts)
