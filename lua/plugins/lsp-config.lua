@@ -3,6 +3,7 @@ local lspservers = {
     "tsserver",
     "eslint",
     "jsonls",
+    "tailwindcss",
 }
 
 return {
@@ -41,6 +42,7 @@ return {
                 end,
             })
             lspconfig.jsonls.setup({ capabilities = capabilities })
+            lspconfig.tailwindcss.setup({ capabilities = capabilities })
 
             vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to Definition" })
             vim.keymap.set("n", "K", vim.lsp.buf.hover)
