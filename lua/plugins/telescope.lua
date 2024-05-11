@@ -20,7 +20,9 @@ return {
 			},
 			{
 				"<leader>fb",
-				"<cmd>Telescope buffers<cr>",
+				function ()
+				    require('telescope.builtin').buffers({sort_mru=true, ignore_current_buffer=true});
+				end,
 				desc = "List buffers",
 			},
 			{
