@@ -8,8 +8,8 @@ return {
 		-- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
 	},
 	keys = {
-		{ "<leader>nf", "<cmd>Neotree filesystem float<cr>" },
-		{ "<leader>nc", "<cmd>Neotree filesystem reveal float<cr>" },
-		{ "<leader>ng", "<cmd>Neotree git_status float<cr>" },
+		{ "<leader>nf", "<cmd>Neotree filesystem float<cr>", desc = "File tree" },
+		{ "<leader>nc", "<cmd>Neotree filesystem reveal float<cr>", desc = "File tree focus current" },
+		{ "<leader>ng", "<cmd>Neotree git_status float<cr>", desc = "Git status tree" },
 	},
 }
