@@ -4,6 +4,7 @@ local lspservers = {
     "eslint",
     "jsonls",
     "tailwindcss",
+    "docker_compose_language_service"
 }
 
 return {
@@ -43,6 +44,7 @@ return {
             })
             lspconfig.jsonls.setup({ capabilities = capabilities })
             lspconfig.tailwindcss.setup({ capabilities = capabilities })
+            lspconfig.docker_compose_language_service.setup({ capabilities = capabilities })
 
             vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to Definition" })
             vim.keymap.set("n", "K", vim.lsp.buf.hover)
