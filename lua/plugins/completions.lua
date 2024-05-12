@@ -9,7 +9,6 @@ return {
         "L3MON4D3/LuaSnip",
         dependencies = {
             "saadparwaiz1/cmp_luasnip",
-            --"rafamadriz/friendly-snippets"
         },
     },
     {
@@ -17,25 +16,9 @@ return {
         config = function()
             local cmp = require("cmp")
             local ls = require("luasnip")
+
             --require("luasnip.loaders.from_vscode").lazy_load()
             require("luasnip.loaders.from_snipmate").lazy_load()
-
-            --Set keymap for moving from slot to slot in snippets
-            vim.keymap.set({ "i", "s" }, "<Tab>", function()
-                if ls.locally_jumpable(1) then
-                    ls.jump(1)
-                else
-                    return "<Tab>"
-                end
-            end, { silent = true, expr = true })
-
-            vim.keymap.set({ "i", "s" }, "<S-Tab>", function()
-                if ls.locally_jumpable(-1) then
-                    ls.jump(-1)
-                else
-                    return "<S-Tab>"
-                end
-            end, { silent = true, expr = true })
 
             cmp.setup({
                 snippet = {
@@ -49,6 +32,20 @@ return {
                     documentation = cmp.config.window.bordered(),
                 },
                 mapping = cmp.mapping.preset.insert({
+                    ["<Tab>"] = cmp.mapping(function(fallback)
+                        if ls.locally_jumpable(1) then
+                            ls.jump(1)
+                        else
+                            fallback()
+                        end
+                    end, { "i", "s" }),
+                    ["<S-Tab>"] = cmp.mapping(function(fallback)
+                        if ls.locally_jumpable(-1) then
+                            ls.jump(-1)
+                        else
+                            fallback()
+                        end
+                    end, { "i", "s" }),
                     ["<C-b>"] = cmp.mapping.scroll_docs(-4),
                     ["<C-f>"] = cmp.mapping.scroll_docs(4),
                     ["<C-Space>"] = cmp.mapping.complete(),
